@@ -1,0 +1,64 @@
+<zk>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<window
+	     apply="org.zkoss.bind.BindComposer" 
+		viewModel="@id('vm')@init('com.work.diddy.ui.UserViewModel')">
+		<style  src="/css/style.css"/>
+		<div class="mt-12">
+			<div
+				class="bg-blue-500 text-white p-4 w-full items-center flex justify-between">
+				<label value="User Management" />
+				<div>
+					<button
+						class="bg-white text-gray-700 p-2 hover:bg-gray-100 hover:text-gray-700"
+						label="export to Excel"></button>
+					<button class="ml-2 bg-white text-gray-700 p-2 hover:bg-gray-100 hover:text-gray-700" onClick="@command('openModal')" label="Add new user" />
+				</div>
+			</div>
+		</div>
+		<grid id="demoGrid"
+		style="margin-top:0;"
+		emptyMessage="no data found"
+			model="@load(vm.users) @template('noneditable')" mold="paging"
+			pageSize="10">
+			<columns class="bg-white text-gray-900" style="color:red;" sizable="true">
+				<column align="center" sclass="thead" label="#" width="3%" />
+
+				<column  label="name" />
+				<column  label="Date Created" />
+				<column   label="Role" />
+
+				<column  align="right" >
+					<span>
+						<label  value="Action">
+						</label>
+					</span>
+				</column>
+			</columns>
+			<template name="noneditable">
+				<row>
+					<label value="${forEachStatus.index + 1}" />
+					<label value="@load(each.name)" />
+					<label value="@load(each.date)" />
+					<label value="@load(each.role)" />
+
+					<div class="pull-right">
+
+						<a tooltiptext="Delete" class="action-btn"
+							onClick="@command('deleteUser', usr=each )">
+							Delete
+						</a>
+
+						<a tooltiptext="${labels.customer.action.update}"
+							href="javascript:;" onClick="@command('onUpdate',student=each)">
+							Edit
+						</a>
+
+					</div>
+
+				</row>
+			</template>
+		</grid>
+	</window>
+</zk>

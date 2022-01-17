@@ -1,0 +1,25 @@
+<zk>
+<window id="win"  width="60%" 
+ apply="org.zkoss.bind.BindComposer" 
+ viewModel="@id('mym')@init('com.work.diddy.ui.UserViewModel')"
+>
+<button id="closeBtn"  onClick="@command('close')" label="close"/>
+	<grid>
+	  <rows>
+	   <row>
+	    <label width="20%" value="name"/>
+	    <textbox width="80%" class="w-3/5" value="@bind(mym.user.name)"/>
+	   </row>
+	    <row>
+	    <label value="role"/>
+	    <textbox value="@bind(mym.user.role)"/>
+	   </row>
+	    <row>
+	    <label value="date Created"/>
+	    <datebox  format="yyyy/MM/dd" value="@bind(mym.user.date)"/>
+	   </row>
+	  </rows>
+	</grid>
+    <button id="saveBtn" label="Register User" onClick="@command('saveUser')" />
+</window>
+</zk>
